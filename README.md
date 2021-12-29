@@ -1,3 +1,29 @@
+# Getting Started with Create React App-aws-amplify
+
+## Create React App
+
+### `npx create-react-app react-fresno`
+
+### `cd react-fresno`
+
+### `code .`
+
+## Create Repo Github
+
+### `git init`
+
+### `git add .`
+
+### `git commit -m "first commit"`
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
