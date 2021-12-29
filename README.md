@@ -24,6 +24,10 @@
 
 ## Make some change in app.js
 
+## Configure Amplify
+
+### `amplify configure`
+
 
 
 
