@@ -16,6 +16,14 @@
 
 ### `git commit -m "first commit"`
 
+### `git remote add origin https://github.com/slimeVidas26/react-fresno.git`
+
+### `git push -u origin master`
+
+### `npm start`
+
+## Make some change in app.js
+
 
 
 
