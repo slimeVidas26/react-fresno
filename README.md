@@ -28,6 +28,14 @@
 
 ### `amplify configure`
 
+## Initialize a new backend
+
+### `amplify init`
+
+## Install Amplify libraries
+
+### `npm install aws-amplify @aws-amplify/ui-react@1.x.x`
+
 
 
 
