@@ -36,6 +36,40 @@
 
 ### `npm install aws-amplify @aws-amplify/ui-react@1.x.x`
 
+## Set up frontend
+
+we need to configure Amplify on the client so that we can use it to interact with our backend services.
+
+Open src/index.js and add the following code below the last import:
+
+```javascript
+
+import Amplify from "aws-amplify";
+import awsExports from "./aws-exports";
+Amplify.configure(awsExports);
+
+```
+
+## Create a GraphQL API and database
+
+### `amplify add api`
+
+### `amplify push`
+
+### `amplify status`
+
+To view the GraphQL API in the AppSync console at any time, run the following command:
+
+### `amplify console api`
+
+To view your entire app in the Amplify console at any time, run the following command:
+
+### `amplify console`
+
+To test this out locally, you can run the mock command.
+
+### `amplify mock api`
+
 
 
 
