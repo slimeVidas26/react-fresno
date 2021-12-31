@@ -171,6 +171,27 @@ To deploy the service, run the push command:
 
 Now, the authentication service has been deployed and you can start using it. To view the deployed services in your project at any time, go to Amplify Console by running the following command: ### `amplify console`
 
+## Create login UI
+
+Open src/App.js and make the following changes:
+
+Import the withAuthenticator component:
+
+```javascript
+import { withAuthenticator } from '@aws-amplify/ui-react'
+
+```
+
+Change the default export to be the withAuthenticator wrapping the main component:
+
+```javascript
+
+export default withAuthenticator(App)
+
+```
+
+### `npm start`
+
 
 
 
