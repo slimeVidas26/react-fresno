@@ -1,12 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = /* GraphQL */ `
-  mutation CreateTodo(
-    $input: CreateTodoInput!
-    $condition: ModelTodoConditionInput
+export const createSong = /* GraphQL */ `
+  mutation CreateSong(
+    $input: CreateSongInput!
+    $condition: ModelSongConditionInput
   ) {
-    createTodo(input: $input, condition: $condition) {
+    createSong(input: $input, condition: $condition) {
       id
       title
       description
@@ -17,12 +17,12 @@ export const createTodo = /* GraphQL */ `
     }
   }
 `;
-export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo(
-    $input: UpdateTodoInput!
-    $condition: ModelTodoConditionInput
+export const updateSong = /* GraphQL */ `
+  mutation UpdateSong(
+    $input: UpdateSongInput!
+    $condition: ModelSongConditionInput
   ) {
-    updateTodo(input: $input, condition: $condition) {
+    updateSong(input: $input, condition: $condition) {
       id
       title
       description
@@ -33,12 +33,12 @@ export const updateTodo = /* GraphQL */ `
     }
   }
 `;
-export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo(
-    $input: DeleteTodoInput!
-    $condition: ModelTodoConditionInput
+export const deleteSong = /* GraphQL */ `
+  mutation DeleteSong(
+    $input: DeleteSongInput!
+    $condition: ModelSongConditionInput
   ) {
-    deleteTodo(input: $input, condition: $condition) {
+    deleteSong(input: $input, condition: $condition) {
       id
       title
       description

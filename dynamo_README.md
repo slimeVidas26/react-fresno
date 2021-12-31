@@ -8,7 +8,7 @@ Update the schema.graphql file as:
 
 ```javascript
 
-type Todo @model {
+type Song @model {
   id: ID!
   title: String!
   description: String!
@@ -16,5 +16,7 @@ type Todo @model {
   owner:String!
 }
 ```
+
+### `git add , commit , push`
 
 ### `amplify push`
