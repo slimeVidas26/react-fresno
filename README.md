@@ -161,6 +161,16 @@ export default App
 
 ### `npm start`
 
+## Authentication with Amplify
+
+### `amplify add auth`
+
+To deploy the service, run the push command:
+
+### `amplify push`
+
+Now, the authentication service has been deployed and you can start using it. To view the deployed services in your project at any time, go to Amplify Console by running the following command: ### `amplify console`
+
 
 
 

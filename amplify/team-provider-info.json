@@ -10,6 +10,11 @@
       "StackName": "amplify-reactfresno-dev-230404",
       "StackId": "arn:aws:cloudformation:us-east-1:337360241061:stack/amplify-reactfresno-dev-230404/de1ed000-68ea-11ec-90da-0a093b81f3bf",
       "AmplifyAppId": "djktalrgrnkqr"
+    },
+    "categories": {
+      "auth": {
+        "reactfresno53a31ce1": {}
+      }
     }
   }
 }
