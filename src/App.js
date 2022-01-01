@@ -8,9 +8,9 @@ import awsExports from "./aws-exports";
 Amplify.configure(awsExports);
 
 
-
-
  function App() {
+
+    const [songs , setSongs] = useState([])
 
 useEffect(() => {
     fetchSongs()
@@ -25,6 +25,7 @@ const fetchSongs = async()=>{
         console.log('songsData' , songsData)
         const songsList = songsData.data.listSongs.items
         console.log("songsList" , songsList)  
+        setSongs(songsList)
     } catch (error) {
         console.log(error)
     }
