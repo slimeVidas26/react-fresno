@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
 import { listSongs } from './graphql/queries'
 import './App.css'
+import {Paper , IconButton} from '@material-ui/core';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import { withAuthenticator , AmplifySignOut } from '@aws-amplify/ui-react'
 import awsExports from "./aws-exports";
@@ -14,20 +17,18 @@ Amplify.configure(awsExports);
 
 useEffect(() => {
     fetchSongs()
-    return () => {
-        "Songs"
-    }
+   
 }, [])
 
 const fetchSongs = async()=>{
     try {
         const songsData = await API.graphql(graphqlOperation(listSongs))
-        console.log('songsData' , songsData)
         const songsList = songsData.data.listSongs.items
-        console.log("songsList" , songsList)  
         setSongs(songsList)
+        console.log("songsList" , songsList)  
+
     } catch (error) {
-        console.log(error)
+        console.log('error on fetching songs', error)
     }
     
 }
@@ -41,6 +42,33 @@ const fetchSongs = async()=>{
             <AmplifySignOut />
             <h2>My App Content</h2>
             </header>
+            <div className="listSongs">
+                {songs.map((song)=>{
+                  return <Paper variant = "outlined" elevation={2}>
+                      <div className="songCard">
+                      <IconButton aria-label="play">
+                        <PlayArrowIcon />
+                        </IconButton>
+                      </div>
+                      <div>
+                          <div className="songTitle">{song.title}</div>
+                          <div className="songOwner">{song.owner}</div>
+                      </div>
+
+                      <div>
+                      <IconButton aria-label="like">
+                        <FavoriteIcon />
+                        </IconButton> 
+                        {song.like}
+                      </div>
+
+                      <div className="songDescription">{song.description}</div>
+                      
+
+
+                  </Paper>
+                })}
+            </div>
         </div>
     )
 }

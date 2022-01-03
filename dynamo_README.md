@@ -74,3 +74,5 @@ const fetchSongs = async()=>{
 export default withAuthenticator(App)
 
 ```
+
+## Using Material UI
