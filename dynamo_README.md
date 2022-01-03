@@ -76,3 +76,37 @@ export default withAuthenticator(App)
 ```
 
 ## Using Material UI
+
+```jsx
+ <div className="listSongs">
+                {songs.map((song)=>{
+                  return <Paper variant = "outlined" elevation={2}>
+                      <div className="songCard">
+                      <IconButton aria-label="play">
+                        <PlayArrowIcon />
+                        </IconButton>
+                      </div>
+                      <div>
+                          <div className="songTitle">{song.title}</div>
+                          <div className="songOwner">{song.owner}</div>
+                      </div>
+
+                      <div>
+                      <IconButton aria-label="like">
+                        <FavoriteIcon />
+                        </IconButton> 
+                        {song.like}
+                      </div>
+
+                      <div className="songDescription">{song.description}</div>
+                      
+
+
+                  </Paper>
+                })}
+            </div>
+
+```
+
+## Update song
+

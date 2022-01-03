@@ -42,15 +42,14 @@ const fetchSongs = async()=>{
             <AmplifySignOut />
             <h2>My App Content</h2>
             </header>
-            <div className="listSongs">
+            <div className="songList">
                 {songs.map((song)=>{
                   return <Paper variant = "outlined" elevation={2}>
                       <div className="songCard">
                       <IconButton aria-label="play">
                         <PlayArrowIcon />
                         </IconButton>
-                      </div>
-                      <div>
+                        <div>
                           <div className="songTitle">{song.title}</div>
                           <div className="songOwner">{song.owner}</div>
                       </div>
@@ -63,6 +62,8 @@ const fetchSongs = async()=>{
                       </div>
 
                       <div className="songDescription">{song.description}</div>
+                      </div>
+                    
                       
 
 
