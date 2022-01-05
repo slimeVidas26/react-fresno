@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
 import { listSongs } from './graphql/queries'
+import { updateSong } from './graphql/mutations'
+
+
 import './App.css'
 import {Paper , IconButton} from '@material-ui/core';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
@@ -25,10 +28,33 @@ const fetchSongs = async()=>{
         const songsData = await API.graphql(graphqlOperation(listSongs))
         const songsList = songsData.data.listSongs.items
         setSongs(songsList)
-        console.log("songsList" , songsList)  
+        //console.log("songsList" , songsList)  
 
     } catch (error) {
         console.log('error on fetching songs', error)
+    }
+    
+}
+
+//addLike
+
+const addLike = async(index)=>{
+    try {
+        console.log('index' , index)
+        const song = songs[index]
+        song.like = song.like + 1
+        delete song.createdAt;
+        delete song.updatedAt
+        console.log({song})
+    
+        const songData  =  await API.graphql(graphqlOperation(updateSong , {input:song}))
+        console.log({songData}) 
+        const songList = [...songs]
+        songList[index]   = songData.data.updateSong
+        setSongs(songList)
+        console.log({songList})
+    } catch (error) {
+       console.log(error) 
     }
     
 }
@@ -43,8 +69,8 @@ const fetchSongs = async()=>{
             <h2>My App Content</h2>
             </header>
             <div className="songList">
-                {songs.map((song)=>{
-                  return <Paper variant = "outlined" elevation={2}>
+                {songs.map((song , index)=>{
+                  return <Paper variant = "outlined" elevation={2} key = {`song${index}`}>
                       <div className="songCard">
                       <IconButton aria-label="play">
                         <PlayArrowIcon />
@@ -55,7 +81,7 @@ const fetchSongs = async()=>{
                       </div>
 
                       <div>
-                      <IconButton aria-label="like">
+                      <IconButton aria-label="like" onClick = {()=>addLike(index)}>
                         <FavoriteIcon />
                         </IconButton> 
                         {song.like}

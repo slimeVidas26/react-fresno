@@ -33,9 +33,15 @@
   display: flex;
   justify-content: space-around;
   padding:5px;
+  margin-bottom: 5px;
 
 }
 
 .songTitle {
   font-weight: bold;
+}
+
+.songDescription {
+  text-align: center; 
+  line-height: 50px;       
 }
