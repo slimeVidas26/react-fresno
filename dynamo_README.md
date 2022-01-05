@@ -112,3 +112,26 @@ export default withAuthenticator(App)
 
 add like on click
 
+```javascript
+const addLike = async(index)=>{
+    try {
+        const song = songs[index]
+        song.like = song.like + 1
+        delete song.createdAt;
+        delete song.updatedAt
+    
+        const songData  =  await API.graphql(graphqlOperation(updateSong , {input:song}))
+        const songList = [...songs]
+        songList[index]   = songData.data.updateSong
+        setSongs(songList)
+    } catch (error) {
+       console.log(error) 
+    }
+    
+}
+
+```
+
+## Play/pause toggleSong feature
+
+

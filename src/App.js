@@ -7,6 +7,8 @@ import { updateSong } from './graphql/mutations'
 import './App.css'
 import {Paper , IconButton} from '@material-ui/core';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
+
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import { withAuthenticator , AmplifySignOut } from '@aws-amplify/ui-react'
@@ -17,6 +19,8 @@ Amplify.configure(awsExports);
  function App() {
 
     const [songs , setSongs] = useState([])
+    const [songPlaying , setSongPlaying] = useState('')
+
 
 useEffect(() => {
     fetchSongs()
@@ -59,6 +63,22 @@ const addLike = async(index)=>{
     
 }
 
+//toggleSong
+const toggleSong = async(index)=>{
+    console.log("toggled" + index);
+
+    if(songPlaying=== index){
+        setSongPlaying('')
+        console.log(songPlaying)
+        return
+    }
+
+    setSongPlaying(index)
+    return
+
+
+}
+
 
 
 
@@ -72,8 +92,8 @@ const addLike = async(index)=>{
                 {songs.map((song , index)=>{
                   return <Paper variant = "outlined" elevation={2} key = {`song${index}`}>
                       <div className="songCard">
-                      <IconButton aria-label="play">
-                        <PlayArrowIcon />
+                      <IconButton aria-label="play" onClick = {()=> toggleSong(index)}>
+                        {songPlaying === index ? <PauseIcon /> : <PlayArrowIcon/>}
                         </IconButton>
                         <div>
                           <div className="songTitle">{song.title}</div>
