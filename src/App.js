@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Amplify, { API, graphqlOperation } from 'aws-amplify'
+import Amplify, { API, graphqlOperation , Storage } from 'aws-amplify'
 import { listSongs } from './graphql/queries'
 import { updateSong } from './graphql/mutations'
 
@@ -20,6 +20,9 @@ Amplify.configure(awsExports);
 
     const [songs , setSongs] = useState([])
     const [songPlaying , setSongPlaying] = useState('')
+    const [audioURL , setAudioURL] = useState('')
+
+
 
 
 useEffect(() => {
@@ -65,19 +68,28 @@ const addLike = async(index)=>{
 
 //toggleSong
 const toggleSong = async(index)=>{
-    console.log("toggled" + index);
-
-    if(songPlaying=== index){
+    console.log('fire toggleSong function')
+    console.log(index)
+    if(songPlaying === index){
         setSongPlaying('')
-        console.log(songPlaying)
-        return
+        return;
+
     }
 
-    setSongPlaying(index)
-    return
+    const songFilePath = songs[index].filePath
+    try {
+        const fileAccessURL = await Storage.get(songFilePath , {expires: 60})
+        console.log({fileAccessURL})
+        setSongPlaying(index)
+        setAudioURL(fileAccessURL)
+        
+    } catch (error) {
+        
+    }
 
-
+    
 }
+
 
 
 
@@ -90,11 +102,12 @@ const toggleSong = async(index)=>{
             </header>
             <div className="songList">
                 {songs.map((song , index)=>{
+                    console.log({index})
                   return <Paper variant = "outlined" elevation={2} key = {`song${index}`}>
                       <div className="songCard">
                       <IconButton aria-label="play" onClick = {()=> toggleSong(index)}>
-                        {songPlaying === index ? <PauseIcon /> : <PlayArrowIcon/>}
-                        </IconButton>
+                          {songPlaying === index ? <PauseIcon/> : <PlayArrowIcon />}
+                      </IconButton>
                         <div>
                           <div className="songTitle">{song.title}</div>
                           <div className="songOwner">{song.owner}</div>

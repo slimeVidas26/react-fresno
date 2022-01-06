@@ -134,4 +134,23 @@ const addLike = async(index)=>{
 
 ## Play/pause toggleSong feature
 
+```jsx
+const toggleSong = async(index)=>{
+    console.log("toggled" + index);
 
+    if(songPlaying=== index){
+        setSongPlaying('')
+        console.log(songPlaying)
+        return
+    }
+
+    setSongPlaying(index)
+    return
+}
+```
+
+## Add Storage
+
+### `amplify add storage`
+
+### `amplify push`

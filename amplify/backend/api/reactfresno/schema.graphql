@@ -10,12 +10,4 @@ type Song @model {
   owner:String!
 }
 
-{
-  "id": "12345"
-  "title": "We are the champions"
-  "description": "Description of We are the champions"
-  "like":4
-  "owner":"isaac"
-  "createdAt" : "2022-01-01T18:37:26.725Z"
-  "updatedAt" : "2022-01-01T18:37:26.725Z"
-}
+
