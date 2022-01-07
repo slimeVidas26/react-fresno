@@ -79,12 +79,13 @@ const toggleSong = async(index)=>{
     const songFilePath = songs[index].filePath
     try {
         const fileAccessURL = await Storage.get(songFilePath , {expires: 60})
-        console.log({fileAccessURL})
+        console.log("accessURL" , {fileAccessURL})
         setSongPlaying(index)
         setAudioURL(fileAccessURL)
         
     } catch (error) {
-        
+        setSongPlaying('')
+        setAudioURL('')
     }
 
     
@@ -122,6 +123,9 @@ const toggleSong = async(index)=>{
 
                       <div className="songDescription">{song.description}</div>
                       </div>
+                      {songPlaying === index
+                      && "AudioPlayer"}
+                      
                     
                       
 
