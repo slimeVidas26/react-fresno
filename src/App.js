@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Amplify, { API, graphqlOperation , Storage } from 'aws-amplify'
+import Amplify, { API, graphqlOperation } from 'aws-amplify'
 import { listSongs } from './graphql/queries'
 import { updateSong } from './graphql/mutations'
 
@@ -20,7 +20,6 @@ Amplify.configure(awsExports);
 
     const [songs , setSongs] = useState([])
     const [songPlaying , setSongPlaying] = useState('')
-    const [audioURL , setAudioURL] = useState('')
 
 
 
@@ -47,19 +46,19 @@ const fetchSongs = async()=>{
 
 const addLike = async(index)=>{
     try {
-        console.log('index' , index)
+        //console.log('index' , index)
         const song = songs[index]
         song.like = song.like + 1
         delete song.createdAt;
         delete song.updatedAt
-        console.log({song})
+        //console.log({song})
     
         const songData  =  await API.graphql(graphqlOperation(updateSong , {input:song}))
-        console.log({songData}) 
+        //console.log({songData}) 
         const songList = [...songs]
         songList[index]   = songData.data.updateSong
         setSongs(songList)
-        console.log({songList})
+        //console.log({songList})
     } catch (error) {
        console.log(error) 
     }
@@ -67,29 +66,11 @@ const addLike = async(index)=>{
 }
 
 //toggleSong
-const toggleSong = async(index)=>{
-    console.log('fire toggleSong function')
-    console.log(index)
-    if(songPlaying === index){
-        setSongPlaying('')
-        return;
-
-    }
-
-    const songFilePath = songs[index].filePath
-    try {
-        const fileAccessURL = await Storage.get(songFilePath , {expires: 60})
-        console.log("accessURL" , {fileAccessURL})
-        setSongPlaying(index)
-        setAudioURL(fileAccessURL)
-        
-    } catch (error) {
-        setSongPlaying('')
-        setAudioURL('')
-    }
-
-    
+const toggleSong = (index)=>{
+    console.log("toggled" , index)
+    songPlaying === index ? setSongPlaying('') : setSongPlaying(index)
 }
+
 
 
 
@@ -103,28 +84,29 @@ const toggleSong = async(index)=>{
             </header>
             <div className="songList">
                 {songs.map((song , index)=>{
-                    console.log({index})
+                    //console.log({index})
                   return <Paper variant = "outlined" elevation={2} key = {`song${index}`}>
                       <div className="songCard">
-                      <IconButton aria-label="play" onClick = {()=> toggleSong(index)}>
-                          {songPlaying === index ? <PauseIcon/> : <PlayArrowIcon />}
-                      </IconButton>
-                        <div>
+                          <div className = "iconAction item">
+                          <IconButton aria-label="play" onClick = {()=>{toggleSong(index)}}>
+                                {songPlaying === index ? <PauseIcon/> : <PlayArrowIcon/>}
+                          </IconButton>
+                          </div>
+                      
+                        <div className = "titleOwner item">
                           <div className="songTitle">{song.title}</div>
                           <div className="songOwner">{song.owner}</div>
                       </div>
 
-                      <div>
+                      <div className = "like item">
                       <IconButton aria-label="like" onClick = {()=>addLike(index)}>
                         <FavoriteIcon />
                         </IconButton> 
                         {song.like}
                       </div>
 
-                      <div className="songDescription">{song.description}</div>
+                      <div className="songDescription item">{song.description}</div>
                       </div>
-                      {songPlaying === index
-                      && "AudioPlayer"}
                       
                     
                       

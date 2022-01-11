@@ -32,11 +32,30 @@
   padding: 5px;
 }
 
+.item{
+  width : 20%
+}
+
+.iconAction{
+    text-align: center;
+}
+
 .songTitle {
   font-weight: bold;
+
+
+}
+
+.titleOwner{
+}
+
+.like{
 }
 
 .ourAudioPlayer {
   display: flex;
   justify-content: center;
+}
+
+.songDescription{
 }
