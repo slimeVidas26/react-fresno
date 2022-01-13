@@ -9,6 +9,7 @@ export const onCreateSong = /* GraphQL */ `
       description
       like
       owner
+      filePath
       createdAt
       updatedAt
     }
@@ -22,6 +23,7 @@ export const onUpdateSong = /* GraphQL */ `
       description
       like
       owner
+      filePath
       createdAt
       updatedAt
     }
@@ -35,6 +37,7 @@ export const onDeleteSong = /* GraphQL */ `
       description
       like
       owner
+      filePath
       createdAt
       updatedAt
     }

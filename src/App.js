@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Amplify, { API, graphqlOperation } from 'aws-amplify'
+import Amplify, { API, graphqlOperation , Storage } from 'aws-amplify'
 import { listSongs } from './graphql/queries'
 import { updateSong } from './graphql/mutations'
-
+import ReactPlayer from 'react-player';
 
 import './App.css'
 import {Paper , IconButton} from '@material-ui/core';
@@ -20,6 +20,7 @@ Amplify.configure(awsExports);
 
     const [songs , setSongs] = useState([])
     const [songPlaying , setSongPlaying] = useState('')
+    const [audioURL , setAudioURL] = useState('')
 
 
 
@@ -66,15 +67,28 @@ const addLike = async(index)=>{
 }
 
 //toggleSong
-const toggleSong = (index)=>{
-    console.log("toggled" , index)
-    songPlaying === index ? setSongPlaying('') : setSongPlaying(index)
+const toggleSong = async(index)=>{
+    
+    if(songPlaying=== index){
+        setSongPlaying('');
+        return;
+    }
+    const songFilePath = songs[index].filePath;
+    try {
+       const fileAccessURL = await Storage.get(songFilePath , {expires:60}) 
+       console.log(fileAccessURL)
+       setAudioURL(fileAccessURL)
+       setSongPlaying(index)
+      
+      return
+       
+    } catch (error) {
+        console.error('error accessing the file from s3', error);
+            setAudioURL('');
+            setSongPlaying('');
+    }
+    
 }
-
-
-
-
-
 
     return (
         <div className='App'>
@@ -107,11 +121,17 @@ const toggleSong = (index)=>{
 
                       <div className="songDescription item">{song.description}</div>
                       </div>
-                      
-                    
-                      
-
-
+                      {songPlaying === index ? (
+                                <div className="ourAudioPlayer">
+                                    <ReactPlayer
+                                        url={audioURL}
+                                        controls
+                                        playing
+                                        height="50px"
+                                        onPause={() => toggleSong(index)}
+                                    />
+                                </div>
+                            ) : null}
                   </Paper>
                 })}
             </div>

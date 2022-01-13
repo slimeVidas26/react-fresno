@@ -8,6 +8,7 @@ type Song @model {
   description: String!
   like:Int!
   owner:String!
+  filePath:String!
 }
 
 
