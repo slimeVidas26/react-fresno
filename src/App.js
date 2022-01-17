@@ -35,7 +35,7 @@ const fetchSongs = async()=>{
         const songsData = await API.graphql(graphqlOperation(listSongs))
         const songsList = songsData.data.listSongs.items
         setSongs(songsList)
-        //console.log("songsList" , songsList)  
+        console.log("songsList" , songsList)  
 
     } catch (error) {
         console.log('error on fetching songs', error)
@@ -77,8 +77,9 @@ const toggleSong = async(index)=>{
     try {
        const fileAccessURL = await Storage.get(songFilePath , {expires:60}) 
        console.log(fileAccessURL)
-       setAudioURL(fileAccessURL)
        setSongPlaying(index)
+       setAudioURL(fileAccessURL)
+      
       
       return
        
@@ -140,4 +141,6 @@ const toggleSong = async(index)=>{
 }
 
 
-export default withAuthenticator(App)
+
+export default App
+//export default withAuthenticator(App)

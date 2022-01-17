@@ -43,7 +43,7 @@
     }
   },
   "storage": {
-    "songStorage": {
+    "songstorage": {
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": []
